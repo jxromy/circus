@@ -1,15 +1,15 @@
 package circus;
 
-import circus.animal.Animal;
-import circus.animal.Duck;
-import circus.animal.Parrot;
-import circus.animal.Tiger;
+import circus.animal.*;
 import circus.stuff.Cannon;
 import circus.stuff.Equipment;
 import circus.stuff.Ladder;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Circus {
-    private static Animal[] animals = {
+    private static Animal[] animals = { // size of array is fixed
             new Duck("Drake"),
             new Parrot("Polly"),
             new Tiger("Tai Lung")
@@ -41,8 +41,35 @@ public class Circus {
     }
 
     public static void main(String[] args) {
-        makeAnimalsTalk();
-        System.out.println("Total value of animals " + calculateAssetValue(animals));
-        System.out.println("Total value of equipments " + calculateAssetValue(equipments));
+        System.out.println(animals.length);
+//        makeAnimalsTalk();
+//        System.out.println("Total value of animals " + calculateAssetValue(animals));
+//        System.out.println("Total value of equipments " + calculateAssetValue(equipments));
+//        animals[3] = new Elephant("Strong One");
+//        System.out.println(animals.length);
+
+        ArrayList<Animal> animalList = new ArrayList<>(Arrays.asList(animals));
+
+        animalList.add(new Parrot("Perry"));
+        animalList.add(new Elephant("Groot"));
+        Duck andy = new Duck("Andy");
+        animalList.add(andy);
+
+        // substitutability allows to add specific animals to "Animal" ArrayList
+
+        System.out.println("Before sorting: ");
+        for (Animal a : animalList) {
+            System.out.println(a);
+        }
+        System.out.println("size of the array list: " + animalList.size());
+
+        System.out.println("Andy is in position: " + animalList.indexOf(andy));
+
+        animalList.sort(Animal.animalNameComparator);
+        System.out.println("After sorting");
+
+        for (Animal a : animalList) {
+            System.out.println(a);
+        }
     }
 }
